@@ -3,4 +3,5 @@ public enum ShipType {
     BATTLESHIP,
     SUBMARINE,
     PATROL,
+    NONE
     }

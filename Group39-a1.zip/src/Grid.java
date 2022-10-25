@@ -1,7 +1,7 @@
 public class Grid {
 
     private final static int GRID_SIZE = 10;
-    private Field[][] grid;
+    private final Field[][] grid;
 
     public Grid() {
         grid = createEmptyGrid();
@@ -11,22 +11,28 @@ public class Grid {
         Field[][] fieldList = new Field[GRID_SIZE][GRID_SIZE];
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
-                Field field = new Field(row, col, FieldState.EMPTY);
+                Field field = new Field(row, col, FieldState.EMPTY, ShipType.NONE);
                 fieldList[col][row] = field;
             }
         }
         return fieldList;
     }
 
+    //needed at the beginning to set the ship-fields on the grid
+    public void placeShipOnGrid(Ship ship, int coordX, int coordY) {
+        grid[coordX][coordY].setFieldState(FieldState.SHIP);
+        grid[coordX][coordY].setShipType(ship.shipType);
+    }
+
     public void printGrid() {
-        //TODO distinguish between ocean grid and target grid (I don't know how yet, with Player or so)
+        //TODO distinguish between ocean grid and target grid (I don't know how yet)
         System.out.println("====== OCEAN GRID ======");
         System.out.println("  A B C D E F G H I J ");
         System.out.println(" +-+-+-+-+-+-+-+-+-+-+ ");
         for (int row = 0; row < GRID_SIZE; row++) {
             System.out.print(row + "|");
             for (int col = 0; col < GRID_SIZE; col++) {
-                System.out.print(evaluatePrintSymbol(grid[row][col].getFieldState()));
+                System.out.print(evaluatePrintSymbol(grid[row][col].getFieldState(), grid[row][col].getShipType()));
             }
             System.out.print(row + "\n");
         }
@@ -35,13 +41,23 @@ public class Grid {
         System.out.println("=======================");
     }
 
-    private String evaluatePrintSymbol(FieldState fieldState) {
+    private String evaluatePrintSymbol(FieldState fieldState, ShipType shipType) {
         return switch (fieldState) {
             case EMPTY -> " |";
             case HIT -> "X|";
             case MISS -> "o|";
-            case SHIP -> "S|";
-            case SUNKEN_SHIP -> "X|"; //TODO correct symbol?
+            case SHIP -> "X|";
+            case SUNKEN_SHIP -> evaluatePrintSymbolShip(shipType);
+        };
+    }
+
+    private String evaluatePrintSymbolShip(ShipType shipType) {
+        return switch (shipType) {
+            case CARRIER -> "C|";
+            case BATTLESHIP -> "B|";
+            case SUBMARINE -> "S|";
+            case PATROL -> "P|";
+            case NONE -> " |"; //shouldn't get here
         };
     }
 
