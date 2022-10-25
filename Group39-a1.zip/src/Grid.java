@@ -1,7 +1,7 @@
 public class Grid {
 
     private final static int GRID_SIZE = 10;
-    private final Field[][] grid;
+    Field[][] grid;
 
     public Grid() {
         grid = createEmptyGrid();
@@ -22,43 +22,6 @@ public class Grid {
     public void placeShipOnGrid(Ship ship, int coordX, int coordY) {
         grid[coordX][coordY].setFieldState(FieldState.SHIP);
         grid[coordX][coordY].setShipType(ship.shipType);
-    }
-
-    public void printGrid() {
-        //TODO distinguish between ocean grid and target grid (I don't know how yet)
-        System.out.println("====== OCEAN GRID ======");
-        System.out.println("  A B C D E F G H I J ");
-        System.out.println(" +-+-+-+-+-+-+-+-+-+-+ ");
-        for (int row = 0; row < GRID_SIZE; row++) {
-            System.out.print(row + "|");
-            for (int col = 0; col < GRID_SIZE; col++) {
-                System.out.print(evaluatePrintSymbol(grid[row][col].getFieldState(), grid[row][col].getShipType()));
-            }
-            System.out.print(row + "\n");
-        }
-        System.out.println(" +-+-+-+-+-+-+-+-+-+-+ ");
-        System.out.println("  A B C D E F G H I J ");
-        System.out.println("=======================");
-    }
-
-    private String evaluatePrintSymbol(FieldState fieldState, ShipType shipType) {
-        return switch (fieldState) {
-            case EMPTY -> " |";
-            case HIT -> "X|";
-            case MISS -> "o|";
-            case SHIP -> "X|";
-            case SUNKEN_SHIP -> evaluatePrintSymbolShip(shipType);
-        };
-    }
-
-    private String evaluatePrintSymbolShip(ShipType shipType) {
-        return switch (shipType) {
-            case CARRIER -> "C|";
-            case BATTLESHIP -> "B|";
-            case SUBMARINE -> "S|";
-            case PATROL -> "P|";
-            case NONE -> " |"; //shouldn't get here
-        };
     }
 
     public void updateFieldState() {
@@ -92,8 +55,12 @@ public class Grid {
                 System.out.println("You have already shot at this location!");
                 break;
         }
-        printGrid();
     }
+
+    public Field[][] getGrid() {
+        return grid;
+    }
+
 
     /*
     public void getShot(Player) {
