@@ -1,23 +1,82 @@
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-
 public class Grid {
-    int size = 10;
-    Field[][] mygrid;
+
+    private final static int GRID_SIZE = 10;
+    private Field[][] grid;
+
     public Grid() {
-        mygrid = gridoffields();
+        grid = createEmptyGrid();
     }
 
-    private Field[][] gridoffields() {
-        Field[][] TempList = new Field[10][10];
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                Field field = new Field(x, y, FieldState.EMPTY);
-                TempList[y][x] = field;
+    private Field[][] createEmptyGrid() {
+        Field[][] fieldList = new Field[GRID_SIZE][GRID_SIZE];
+        for (int row = 0; row < GRID_SIZE; row++) {
+            for (int col = 0; col < GRID_SIZE; col++) {
+                Field field = new Field(row, col, FieldState.EMPTY);
+                fieldList[col][row] = field;
             }
         }
-        return TempList;
+        return fieldList;
+    }
+
+    public void printGrid() {
+        //TODO distinguish between ocean grid and target grid (I don't know how yet, with Player or so)
+        System.out.println("====== OCEAN GRID ======");
+        System.out.println("  A B C D E F G H I J ");
+        System.out.println(" +-+-+-+-+-+-+-+-+-+-+ ");
+        for (int row = 0; row < GRID_SIZE; row++) {
+            System.out.print(row + "|");
+            for (int col = 0; col < GRID_SIZE; col++) {
+                System.out.print(evaluatePrintSymbol(grid[row][col].getFieldState()));
+            }
+            System.out.print(row + "\n");
+        }
+        System.out.println(" +-+-+-+-+-+-+-+-+-+-+ ");
+        System.out.println("  A B C D E F G H I J ");
+        System.out.println("=======================");
+    }
+
+    private String evaluatePrintSymbol(FieldState fieldState) {
+        return switch (fieldState) {
+            case EMPTY -> " |";
+            case HIT -> "X|";
+            case MISS -> "o|";
+            case SHIP -> "S|";
+            case SUNKEN_SHIP -> "X|"; //TODO correct symbol?
+        };
+    }
+
+    public void updateFieldState() {
+
+        //TODO This is temporarily hardcoded. A method in Player or wherever should return the coordinates.
+        //TODO so player has to be a property of Grid
+        int coordX = 7;
+        int coordY = 8;
+
+        // select the Field which was shot at
+        Field hitField = grid[coordX][coordY];
+
+        //get actual FieldState of the hit Field and update its state
+        switch (hitField.getFieldState()) {
+            case EMPTY:
+                hitField.setFieldState(FieldState.MISS);
+                System.out.println("Bummer, that was a miss :(");
+                break;
+            case SHIP:
+                hitField.setFieldState(FieldState.HIT);
+                System.out.println("That was a hit, Nice !!!");
+                break;
+            case HIT:
+                //TODO
+                break;
+            case MISS:
+                //TODO
+                break;
+            case SUNKEN_SHIP:
+                //TODO figure out if ship is sunken
+                System.out.println("You have already shot at this location!");
+                break;
+        }
+        printGrid();
     }
 
     /*

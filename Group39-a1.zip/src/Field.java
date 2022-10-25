@@ -1,7 +1,9 @@
 public class Field {
+
     private int x;
     private int y;
     private FieldState fieldState;
+
     public Field(int x, int y, FieldState fieldState) {
         this.x = x;
         this.y = y;
