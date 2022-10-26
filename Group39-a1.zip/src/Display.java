@@ -6,25 +6,7 @@ public class Display {
 
     }
 
-    //displays the player's own ships and the shots called by the opponent
-    public void displayOceanGrid(Grid grid) {
-        System.out.println("===== OCEAN GRID =====");
-        System.out.println("  A B C D E F G H I J ");
-        System.out.println(" +-+-+-+-+-+-+-+-+-+-+ ");
-        for (int row = 0; row < GRID_SIZE; row++) {
-            System.out.print(row + "|");
-            for (int col = 0; col < GRID_SIZE; col++) {
-                System.out.print(evaluatePrintSymbolOcean(
-                        grid.getGrid()[row][col].getFieldState(),
-                        grid.getGrid()[row][col].getShipType())
-                );
-            }
-            System.out.print(row + "\n");
-        }
-        System.out.println(" +-+-+-+-+-+-+-+-+-+-+ ");
-        System.out.println("  A B C D E F G H I J ");
-        System.out.println("=======================");
-    }
+    //TODO constructor
 
     //displays the results of the player's own shots
     public void displayTargetGrid(Grid grid) {
@@ -46,25 +28,41 @@ public class Display {
         System.out.println("=======================");
     }
 
-    //TODO get the correct symbols
-
-    private String evaluatePrintSymbolOcean(FieldState fieldState, ShipType shipType) {
-        return switch (fieldState) {
-            case EMPTY -> " |";
-            case HIT -> "X|";
-            case MISS -> "o|";
-            case SHIP -> evaluatePrintSymbolShip(shipType);
-            case SUNKEN_SHIP -> "X|";
-        };
+    //displays the player's own ships and the shots called by the opponent
+    public void displayOceanGrid(Grid grid) {
+        System.out.println("===== OCEAN GRID =====");
+        System.out.println("  A B C D E F G H I J ");
+        System.out.println(" +-+-+-+-+-+-+-+-+-+-+ ");
+        for (int row = 0; row < GRID_SIZE; row++) {
+            System.out.print(row + "|");
+            for (int col = 0; col < GRID_SIZE; col++) {
+                System.out.print(evaluatePrintSymbolOcean(
+                        grid.getGrid()[row][col].getFieldState(),
+                        grid.getGrid()[row][col].getShipType())
+                );
+            }
+            System.out.print(row + "\n");
+        }
+        System.out.println(" +-+-+-+-+-+-+-+-+-+-+ ");
+        System.out.println("  A B C D E F G H I J ");
+        System.out.println("=======================");
     }
 
     private String evaluatePrintSymbolTarget(FieldState fieldState, ShipType shipType) {
         return switch (fieldState) {
-            case EMPTY -> " |";
+            case EMPTY, SHIP -> " |";
             case HIT -> "X|";
             case MISS -> "o|";
-            case SHIP -> "X|";
             case SUNKEN_SHIP -> evaluatePrintSymbolShip(shipType);
+        };
+    }
+
+    private String evaluatePrintSymbolOcean(FieldState fieldState, ShipType shipType) {
+        return switch (fieldState) {
+            case EMPTY -> " |";
+            case HIT, SUNKEN_SHIP -> "X|";
+            case MISS -> "o|";
+            case SHIP -> evaluatePrintSymbolShip(shipType);
         };
     }
 
