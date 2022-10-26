@@ -1,12 +1,16 @@
+import java.lang.reflect.Array;
+
 public class Grid {
 
     private final static int GRID_SIZE = 10;
+    private Player player;
     Field[][] grid;
 
     //TODO Player as property
 
-    public Grid() {
+    public Grid(Player player) {
         grid = createEmptyGrid();
+        this.player = player;
     }
 
     private Field[][] createEmptyGrid() {
@@ -26,7 +30,9 @@ public class Grid {
         grid[coordX][coordY].setShipType(ship.shipType);
     }
 
-    public void updateFieldState(int coordX, int coordY) {
+    public void updateFieldState(int[] coordsXY) {
+        int coordX = (int)Array.get(coordsXY, 0);
+        int coordY = (int)Array.get(coordsXY, 1);
         // select the Field which was shot at
         Field hitField = grid[coordX][coordY];
 
