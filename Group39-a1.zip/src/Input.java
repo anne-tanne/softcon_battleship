@@ -26,6 +26,7 @@ public class Input {
                 System.out.println("First position must be a letter from A to J");
                 valid = false;
             }
+            //TODO and <=9 ?
             if (!Character.isDigit(shootInput.charAt(1))){
                 System.out.println("Second Position must be a digit.");
                 valid = false;

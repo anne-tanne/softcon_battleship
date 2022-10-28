@@ -6,8 +6,6 @@ public class Grid {
     private Player player;
     Field[][] grid;
 
-    //TODO Player as property
-
     public Grid(Player player) {
         grid = createEmptyGrid();
         this.player = player;
@@ -17,7 +15,7 @@ public class Grid {
         Field[][] fieldList = new Field[GRID_SIZE][GRID_SIZE];
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
-                Field field = new Field(row, col, FieldState.EMPTY, ShipType.NONE);
+                Field field = new Field(FieldState.EMPTY, new Ship(ShipType.NONE));
                 fieldList[col][row] = field;
             }
         }
@@ -27,12 +25,13 @@ public class Grid {
     //needed at the beginning to set the ship-fields on the grid
     public void placeShipOnGrid(Ship ship, int coordX, int coordY) {
         grid[coordX][coordY].setFieldState(FieldState.SHIP);
-        grid[coordX][coordY].setShipType(ship.shipType);
+        grid[coordX][coordY].setShip(ship);
     }
 
     public void updateFieldState(int[] coordsXY) {
-        int coordX = (int)Array.get(coordsXY, 0);
-        int coordY = (int)Array.get(coordsXY, 1);
+        int coordX = (int) Array.get(coordsXY, 0);
+        int coordY = (int) Array.get(coordsXY, 1);
+
         // select the Field which was shot at
         Field hitField = grid[coordX][coordY];
 
@@ -44,9 +43,9 @@ public class Grid {
             }
             case SHIP -> {
                 //TODO
-                // Ship.gotShot (leben Abgezogen) -> Ship.checkLife
+                //Ship.gotShot (leben Abgezogen) -> Ship.checkLife
                 //if checkLife == False
-                // DESTROYED
+                //DESTROYED
                 hitField.setFieldState(FieldState.HIT);
                 System.out.println("That was a hit, Nice !!!");
             }
