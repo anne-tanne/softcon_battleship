@@ -69,6 +69,7 @@ public class Input {
             if (!letterIsValid(pos1)){
                 valid = false;
             }
+            //TODO and <=9 ?
             if (!Character.isDigit(shootInput.charAt(1))){
                 System.out.println("Second Position must be a digit.");
                 valid = false;

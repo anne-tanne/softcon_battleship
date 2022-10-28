@@ -20,6 +20,7 @@ public class Game {
         display.displayTargetGrid(gridPlayerOne);
         display.displayOceanGrid(gridPlayerOne);
 
+        //------STUFF FOR TESTING-----//
         //TODO needs x and y coordinates as input
         //gridPlayerOne.updateFieldState();
 
@@ -31,6 +32,9 @@ public class Game {
 
         display.displayTargetGrid(gridPlayerOne);
         display.displayOceanGrid(gridPlayerOne);
+
+        ShipType testtype = ShipType.CARRIER;
+        int testlength = testtype.getLength();
     }
 
     public Boolean hasWinner(){
