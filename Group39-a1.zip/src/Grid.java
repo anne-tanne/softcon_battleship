@@ -12,10 +12,11 @@ public class Grid {
     }
 
     private Field[][] createEmptyGrid() {
+        Ship emptyShip = new Ship(ShipType.NONE); //this is the default "empty ship" of each Field
         Field[][] fieldList = new Field[GRID_SIZE][GRID_SIZE];
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
-                Field field = new Field(FieldState.EMPTY, new Ship(ShipType.NONE));
+                Field field = new Field(FieldState.EMPTY, emptyShip);
                 fieldList[col][row] = field;
             }
         }
