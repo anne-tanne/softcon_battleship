@@ -3,9 +3,11 @@ import java.util.Scanner;
 
 public class HumanShoot implements ShootBehaviour{
 
+    //TODO figure out how to handle null (since shootInput can return null or possibly another "incorrect" value
     @Override
     public int[] shoot(){
-        String attackedField = Input.shootInput();
+        Input.shootInput();
+        String attackedField = Input.validShootInput;
         String attackedXAsString = String.valueOf(attackedField.charAt(0));
 
         int attackedXCoord = convertXCoordToInt(attackedXAsString);
