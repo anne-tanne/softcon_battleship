@@ -33,7 +33,7 @@ public class Game {
         display.displayTargetGrid(gridPlayerOne);
         display.displayOceanGrid(gridPlayerOne);
 
-        ShipTypeExperimental testtype = ShipTypeExperimental.CARRIER;
+        ShipType testtype = ShipType.CARRIER;
         int testlength = testtype.getLength();
     }
 

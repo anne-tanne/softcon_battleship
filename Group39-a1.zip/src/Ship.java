@@ -1,15 +1,17 @@
 public class Ship {
-    // Attributes: Type, Size, Location(Coord1/coord2) ,State(Array of positions)
-    // Methods: Getters, setters
 
+    private int hitCounter = 0;
     ShipType shipType;
 
     public Ship(ShipType shipType) {
         this.shipType = shipType;
     }
 
-    public Boolean isSunken(){
-        //TODO
-        return false;
+    public void gotHit(){
+        hitCounter += 1;
+    }
+
+    public Boolean isSunken() {
+        return hitCounter != shipType.getLength();
     }
 }
