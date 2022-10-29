@@ -19,7 +19,7 @@ public class Grid {
         for (int row = 0; row < GRID_SIZE; row++) {
             for (int col = 0; col < GRID_SIZE; col++) {
                 Field field = new Field(FieldState.EMPTY, emptyShip);
-                fieldList[col][row] = field;
+                fieldList[row][col] = field;
             }
         }
         return fieldList;
@@ -85,8 +85,8 @@ public class Grid {
 
     //needed at the beginning to set the ship-fields on the grid
     public void placeShipOnGrid(Ship ship, int coordX, int coordY) {
-        grid[coordX][coordY].setFieldState(FieldState.SHIP);
-        grid[coordX][coordY].setShip(ship);
+        grid[coordY][coordX].setFieldState(FieldState.SHIP);
+        grid[coordY][coordX].setShip(ship);
     }
 
     public void updateFieldState(int[] coordsXY) {
@@ -94,7 +94,7 @@ public class Grid {
         int coordY = (int) Array.get(coordsXY, 1);
 
         // select the Field which was shot at
-        Field hitField = grid[coordX][coordY];
+        Field hitField = grid[coordY][coordX];
 
         //get actual FieldState of the hit Field and update its state
         switch (hitField.getFieldState()) {
