@@ -31,15 +31,14 @@ public class Grid {
                 int counter = 0;
                 //iterates as long as the counter value hits the number of appearances of the specific ship
                 while (counter < shiptype.getNumber()) {
+                    //TODO temporarily display
                     Display d = new Display();
                     d.displayOceanGrid(this);
+
                     boolean isValid = false;
                     while (!isValid) {
-                        //TODO needs to be in Player
-                        System.out.println("Please place your ship " + shiptype.getSimplename());
-
-                        //check if ship is "placeable" -> check if chosen fields corresponds to ship length
-                        int[] coords = player.placeShip(shiptype.getLength());
+                        // get user input
+                        int[] coords = player.placeShip(shiptype);
 
                         int xCoordStart = coords[0];
                         int yCoordStart = coords[1];
@@ -62,7 +61,7 @@ public class Grid {
                                 }
                                 isValid = true;
                             } else {
-                                System.out.println("There is already a ship.");
+                                player.printErrorMessage("There is already a ship.");
                             }
                             //ship is on the same row (horizontal placement)
                         } else if (yCoordStart == yCoordEnd && (xCoordEnd == xCoordStart + shiptype.getLength() - 1
@@ -80,10 +79,10 @@ public class Grid {
                                 }
                                 isValid = true;
                             } else {
-                                System.out.println("There is already a ship.");
+                                player.printErrorMessage("There is already a ship.");
                             }
                         } else {
-                            System.out.println("Sorry, your ship cannot be placed.");
+                            player.printErrorMessage("Sorry, your ship cannot be placed.");
                         }
                     }
                     counter++;

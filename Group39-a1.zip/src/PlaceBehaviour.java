@@ -1,3 +1,5 @@
 public interface PlaceBehaviour {
-    int[] placeShip(int length);
+    int[] placeShip(ShipType shiptype);
+
+    void printErrorMessage(String errormessage);
 }
