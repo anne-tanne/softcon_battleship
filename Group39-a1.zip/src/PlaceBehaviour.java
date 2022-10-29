@@ -1,3 +1,3 @@
 public interface PlaceBehaviour {
-    int [] placeShip();
+    int[] placeShip(int length);
 }

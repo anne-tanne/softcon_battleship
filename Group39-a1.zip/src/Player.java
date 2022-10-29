@@ -6,8 +6,8 @@ public class Player {
     public int[] shoot(){
         return shootBehaviour.shoot();
     }
-    public int[] placeShip(){
-        return placeBehaviour.placeShip();
+    public int[] placeShip(int length){
+        return placeBehaviour.placeShip(length);
     }
 
     //public void setShootBehaviour(ShootBehaviour newShootBehaviour){
