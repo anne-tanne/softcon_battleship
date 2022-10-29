@@ -1,9 +1,13 @@
 public class Player {
 
     public ShootBehaviour shootBehaviour;
+    public PlaceBehaviour placeBehaviour;
 
     public int[] shoot(){
         return shootBehaviour.shoot();
+    }
+    public int[] placeShip(){
+        return placeBehaviour.placeShip();
     }
 
     //public void setShootBehaviour(ShootBehaviour newShootBehaviour){
