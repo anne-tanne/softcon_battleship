@@ -4,13 +4,11 @@ public class Grid {
 
     private final static int GRID_SIZE = 10;
     private Player player;
-    private Player otherPlayer;
     Field[][] grid;
 
-    public Grid(Player player, Player otherPlayer) {
+    public Grid(Player player) {
         grid = createEmptyGrid();
         this.player = player;
-        this.otherPlayer = otherPlayer;
     }
 
     private Field[][] createEmptyGrid() {
@@ -31,10 +29,6 @@ public class Grid {
                 int counter = 0;
                 //iterates as long as the counter value hits the number of appearances of the specific ship
                 while (counter < shiptype.getNumber()) {
-                    //TODO temporarily display
-                    Display d = new Display();
-                    d.displayOceanGrid(this);
-
                     boolean isValid = false;
                     while (!isValid) {
                         // get user input
@@ -47,7 +41,7 @@ public class Grid {
 
                         //ship is on the same column (vertical placement)
                         if (xCoordStart == xCoordEnd && (yCoordEnd == yCoordStart + shiptype.getLength() - 1
-                                || yCoordEnd == yCoordStart - shiptype.getLength() - 1)) {
+                                || yCoordEnd == yCoordStart - shiptype.getLength() + 1)) {
 
                             //check first if all relevant Fields are free before starting placing ships
                             int start = Math.min(yCoordStart, yCoordEnd);
@@ -65,7 +59,7 @@ public class Grid {
                             }
                             //ship is on the same row (horizontal placement)
                         } else if (yCoordStart == yCoordEnd && (xCoordEnd == xCoordStart + shiptype.getLength() - 1
-                                || xCoordEnd == xCoordStart - shiptype.getLength() - 1)) {
+                                || xCoordEnd == xCoordStart - shiptype.getLength() + 1)) {
 
                             //check first if all relevant Fields are free before starting placing ships
                             int start = Math.min(xCoordStart, xCoordEnd);
@@ -86,6 +80,9 @@ public class Grid {
                         }
                     }
                     counter++;
+                    //TODO temporarily display
+                    Display d = new Display();
+                    d.displayOceanGrid(this);
                 }
             }
         }

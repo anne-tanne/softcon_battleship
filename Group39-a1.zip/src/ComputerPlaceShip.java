@@ -11,18 +11,18 @@ public class ComputerPlaceShip implements PlaceBehaviour {
 
         int horVert = ThreadLocalRandom.current().nextInt(0, 2);
         if (horVert == 0) {
-            endCoordX = startCoordX + shiptype.getLength();
+            endCoordX = startCoordX + shiptype.getLength() - 1;
             endCoordY = startCoordY;
         } else {
             endCoordX = startCoordX;
-            endCoordY = startCoordY + shiptype.getLength();
+            endCoordY = startCoordY + shiptype.getLength() - 1;
         }
 
         if (endCoordX > 9) {
-            endCoordX = startCoordX - shiptype.getLength();
+            endCoordX = startCoordX - shiptype.getLength() + 1;
         }
         if (endCoordY > 9) {
-            endCoordY = startCoordY - shiptype.getLength();
+            endCoordY = startCoordY - shiptype.getLength() + 1;
         }
         return new int[]{startCoordX, startCoordY, endCoordX, endCoordY};
     }
