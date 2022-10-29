@@ -4,11 +4,13 @@ public class Grid {
 
     private final static int GRID_SIZE = 10;
     private Player player;
+    private Player otherPlayer;
     Field[][] grid;
 
-    public Grid(Player player) {
+    public Grid(Player player, Player otherPlayer) {
         grid = createEmptyGrid();
         this.player = player;
+        this.otherPlayer = otherPlayer;
     }
 
     private Field[][] createEmptyGrid() {
@@ -50,9 +52,13 @@ public class Grid {
                 hitField.setFieldState(FieldState.HIT);
                 System.out.println("That was a hit, Nice !!!");
             }
-            case HIT, MISS, SUNKEN_SHIP ->
+            case HIT, MISS, SUNKEN_SHIP -> {
                 //TODO shoot again
-                    System.out.println("You have already shot at this location!");
+                System.out.println("You have already shot at this location!");
+                // I tried it with otherPlayer but this seems to work
+                // I leave "otherPlayer" in here we can delete it in the end if it's never used.
+                player.shoot();
+            }
         }
     }
 

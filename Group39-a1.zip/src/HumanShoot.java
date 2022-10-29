@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class HumanShoot implements ShootBehaviour{
 
     //TODO figure out how to handle null (since shootInput can return null or possibly another "incorrect" value

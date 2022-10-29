@@ -27,7 +27,26 @@ public class Input {
         }
     }
 
-    private static boolean validateShipPlacementInput(String placedShipPosition) {
+    private static boolean validateShootInput(@NotNull String shootInput){
+        if (shootInput.length() != 2) {
+            System.out.println("Input must be exactly 2 characters long.");
+            return false;
+        } else {
+            boolean valid = true;
+            char pos1 = shootInput.charAt(0);
+            if (!letterIsValid(pos1)){
+                valid = false;
+            }
+            //TODO and <=9 ?
+            if (!Character.isDigit(shootInput.charAt(1))){
+                System.out.println("Second Position must be a digit.");
+                valid = false;
+            }
+            return valid;
+        }
+    }
+
+    private static boolean validateShipPlacementInput(@NotNull String placedShipPosition) {
         if (placedShipPosition.length() != 5){
             System.out.println("Input must be exactly 5 characters long.");
             return false;
@@ -53,25 +72,6 @@ public class Input {
             }
             if (!Character.isDigit(placedShipPosition.charAt(4))){
                 System.out.println("Second position of coordinate must be a digit.");
-                valid = false;
-            }
-            return valid;
-        }
-    }
-
-    private static boolean validateShootInput(@NotNull String shootInput){
-        if (shootInput.length() != 2) {
-            System.out.println("Input must be exactly 2 characters long.");
-            return false;
-        } else {
-            boolean valid = true;
-            char pos1 = shootInput.charAt(0);
-            if (!letterIsValid(pos1)){
-                valid = false;
-            }
-            //TODO and <=9 ?
-            if (!Character.isDigit(shootInput.charAt(1))){
-                System.out.println("Second Position must be a digit.");
                 valid = false;
             }
             return valid;

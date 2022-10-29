@@ -14,8 +14,8 @@ public class Game {
         Player player1 = new HumanPlayer();
         Player player2 = new ComputerPlayer();
 
-        gridPlayerOne = new Grid(player1);
-        gridPlayerTwo = new Grid(player2);
+        gridPlayerOne = new Grid(player1, player2);
+        gridPlayerTwo = new Grid(player2, player1);
 
         display.displayTargetGrid(gridPlayerOne);
         display.displayOceanGrid(gridPlayerOne);
