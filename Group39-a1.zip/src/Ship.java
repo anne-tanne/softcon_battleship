@@ -1,17 +1,18 @@
 public class Ship {
 
-    private int hitCounter = 0;
+    private int lifeCounter;
     ShipType shipType;
 
     public Ship(ShipType shipType) {
         this.shipType = shipType;
+        this.lifeCounter = this.shipType.getLength();
     }
 
     public void gotHit(){
-        hitCounter += 1;
+        lifeCounter -= 1;
     }
 
     public Boolean isSunken() {
-        return hitCounter != shipType.getLength();
+        return lifeCounter <= 0;
     }
 }

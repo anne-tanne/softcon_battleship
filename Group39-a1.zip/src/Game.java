@@ -28,14 +28,14 @@ public class Game {
         //TODO needs x and y coordinates as input
         //gridPlayerOne.updateFieldState();
 
-        display.displayTargetGrid(gridPlayerOne);
-        display.displayOceanGrid(gridPlayerOne);
+        //display.displayTargetGrid(gridPlayerOne);
+        //display.displayOceanGrid(gridPlayerOne);
 
-        display.displayTargetGrid(gridPlayerOne);
-        display.displayOceanGrid(gridPlayerOne);
+        //display.displayTargetGrid(gridPlayerOne);
+        //display.displayOceanGrid(gridPlayerOne);
 
-        ShipType testtype = ShipType.CARRIER;
-        int testlength = testtype.getLength();
+        //ShipType testtype = ShipType.CARRIER;
+        //int testlength = testtype.getLength();
 
         display.displayTargetGrid(gridPlayerOne);
         display.displayOceanGrid(gridPlayerOne);
