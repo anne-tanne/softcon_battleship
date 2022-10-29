@@ -36,10 +36,12 @@ public class Grid {
                     //TODO check on validity of input via Input class
 
                     //check if ship is "placeable" -> check if chosen fields corresponds to ship length
-                    int xCoordStart = 1;
-                    int yCoordStart = 1;
-                    int xCoordEnd = 1;
-                    int yCoordEnd = 6;
+                    int[] coords = player.placeShip(shiptype.getLength());
+
+                    int xCoordStart = coords[0];
+                    int yCoordStart = coords[1];
+                    int xCoordEnd = coords[2];
+                    int yCoordEnd = coords[3];
 
                     //ship is on the same column (vertical placement)
                     if (xCoordStart == xCoordEnd && (yCoordEnd == yCoordStart + shiptype.getLength() - 1
@@ -78,6 +80,7 @@ public class Grid {
                     }
 
                     counter++;
+
                 }
             }
         }
