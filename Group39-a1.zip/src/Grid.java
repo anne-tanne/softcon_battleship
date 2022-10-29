@@ -25,6 +25,64 @@ public class Grid {
         return fieldList;
     }
 
+    public void setInitialShips() {
+        for (ShipType shiptype : ShipType.values()) {
+            if (shiptype != ShipType.NONE) {
+                int counter = 0;
+                //iterates as long as the counter value hits the number of appearances of the specific ship
+                while (counter < shiptype.getNumber()) {
+                    System.out.println("Please place your ship " + shiptype.getSimplename());
+
+                    //TODO check on validity of input via Input class
+
+                    //check if ship is "placeable" -> check if chosen fields corresponds to ship length
+                    int xCoordStart = 1;
+                    int yCoordStart = 1;
+                    int xCoordEnd = 1;
+                    int yCoordEnd = 6;
+
+                    //ship is on the same column (vertical placement)
+                    if (xCoordStart == xCoordEnd && (yCoordEnd == yCoordStart + shiptype.getLength() - 1
+                            || yCoordEnd == yCoordStart - shiptype.getLength() - 1)) {
+                        System.out.println("HELL YEAH");
+
+                        //loop through all relevant fields
+                        int start = Math.min(yCoordStart, yCoordEnd);
+                        int end = Math.max(yCoordStart, yCoordEnd);
+
+                        //TODO check if there is already a ship placed
+
+                        //TODO place the ship on the specific fields of grid
+                        Ship ship = new Ship(shiptype); //new ship with current ship type
+                        for (int i = start; i <= end; i++) {
+                            placeShipOnGrid(ship, xCoordStart, i);
+                        }
+
+                        //ship is on the same row (horizontal placement)
+                    } else if (yCoordStart == yCoordEnd && (xCoordEnd == xCoordStart + shiptype.getLength() - 1
+                            || xCoordEnd == xCoordStart - shiptype.getLength() - 1)) {
+                        //loop through all relevant fields
+                        int start = Math.min(xCoordStart, xCoordEnd);
+                        int end = Math.max(xCoordStart, xCoordEnd);
+
+                        //TODO check if there is already a ship placed
+
+                        //TODO place the ship on the specific fields of grid
+                        Ship ship = new Ship(shiptype); //new ship with current ship type
+                        for (int i = start; i <= end; i++) {
+                            placeShipOnGrid(ship, i, yCoordStart);
+                        }
+                    } else {
+                        //TODO
+                        System.out.println("OHH NO");
+                    }
+
+                    counter++;
+                }
+            }
+        }
+    }
+
     //needed at the beginning to set the ship-fields on the grid
     public void placeShipOnGrid(Ship ship, int coordX, int coordY) {
         grid[coordX][coordY].setFieldState(FieldState.SHIP);
@@ -65,6 +123,5 @@ public class Grid {
     public Field[][] getGrid() {
         return grid;
     }
-
 }
 

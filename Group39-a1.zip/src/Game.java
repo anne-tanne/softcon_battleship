@@ -27,14 +27,15 @@ public class Game {
         display.displayTargetGrid(gridPlayerOne);
         display.displayOceanGrid(gridPlayerOne);
 
-        Ship testShip = new Ship(ShipType.BATTLESHIP);
-        gridPlayerOne.placeShipOnGrid(testShip, 1, 1);
-
         display.displayTargetGrid(gridPlayerOne);
         display.displayOceanGrid(gridPlayerOne);
 
         ShipType testtype = ShipType.CARRIER;
         int testlength = testtype.getLength();
+        gridPlayerOne.setInitialShips();
+
+        display.displayTargetGrid(gridPlayerOne);
+        display.displayOceanGrid(gridPlayerOne);
     }
 
     public Boolean hasWinner(){
