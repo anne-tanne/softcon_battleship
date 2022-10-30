@@ -2,10 +2,10 @@ public class Game {
 
     private Grid gridPlayer1;
     private Grid gridPlayer2;
-    private Player player1;
-    private Player player2;
-    private Fleet fleetPlayer1;
-    private Fleet fleetPlayer2;
+    private final Player player1;
+    private final Player player2;
+    private final Fleet fleetPlayer1;
+    private final Fleet fleetPlayer2;
     private Display display;
 
     public Game() {
