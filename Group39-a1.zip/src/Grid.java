@@ -110,8 +110,6 @@ public class Grid {
     }
 
     public void updateFieldState(int[] coordsXY) {
-        // maybe i could try otherPlayer.shoot() here.
-        //int[] coordsXY = player.shoot();
         int coordX = (int) Array.get(coordsXY, 0);
         int coordY = (int) Array.get(coordsXY, 1);
 
@@ -125,19 +123,28 @@ public class Grid {
                 System.out.println("Bummer, that was a miss :(");
             }
             case SHIP -> {
-                //TODO
-                //Ship.gotShot (leben Abgezogen) -> Ship.checkLife
-                //if checkLife == False
-                //DESTROYED
-                hitField.setFieldState(FieldState.HIT);
-                System.out.println("That was a hit, Nice !!!");
+                hitField.getShip().gotHit();
+                if (hitField.getShip().isSunken()) {
+                    destroyShip(hitField.getShip());
+                    System.out.println("That was a hit, the ship is destroyed !!!");
+                } else {
+                    hitField.setFieldState(FieldState.HIT);
+                    System.out.println("That was a hit, Nice !!!");
+                }
             }
             case HIT, MISS, SUNKEN_SHIP -> {
-                //TODO shoot again
                 System.out.println("You have already shot at this location!");
-                // I tried it with otherPlayer but this seems to work
-                // I leave "otherPlayer" in here we can delete it in the end if it's never used.
                 updateFieldState(otherPlayer.shoot());
+            }
+        }
+    }
+
+    private void destroyShip(Ship ship) {
+        for (int row = 0; row < GRID_SIZE; row++) {
+            for (int col = 0; col < GRID_SIZE; col++) {
+                if (grid[col][row].getShip() == ship) {
+                    grid[col][row].setFieldState(FieldState.SUNKEN_SHIP);
+                }
             }
         }
     }
@@ -146,4 +153,3 @@ public class Grid {
         return grid;
     }
 }
-
