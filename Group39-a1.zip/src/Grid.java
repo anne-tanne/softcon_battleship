@@ -3,14 +3,16 @@ import java.lang.reflect.Array;
 public class Grid {
 
     private final static int GRID_SIZE = 10;
-    private Player player;
-    private Player otherPlayer;
-    Field[][] grid;
+    private final Player player;
+    private final Player otherPlayer;
+    private final Fleet fleet;
+    private final Field[][] grid;
 
-    public Grid(Player player, Player otherPlayer) {
+    public Grid(Player player, Player otherPlayer, Fleet fleet) {
         grid = createEmptyGrid();
         this.player = player;
-        this.otherPlayer =otherPlayer;
+        this.otherPlayer = otherPlayer;
+        this.fleet = fleet;
     }
 
     private Field[][] createEmptyGrid() {
@@ -26,68 +28,58 @@ public class Grid {
     }
 
     public void setInitialShips() {
-        for (ShipType shiptype : ShipType.values()) {
-            if (shiptype != ShipType.NONE) { //ignore ShipType NONE
-                int counter = 0;
-                //iterates as long as the counter value hits the number of appearances of the specific ship
-                while (counter < shiptype.getNumber()) {
-                    boolean isValid = false;
-                    while (!isValid) {
-                        // get user input
-                        int[] coords = player.placeShip(shiptype);
+        for (Ship ship : fleet.getShips()) {
+            boolean isValid = false;
+            while (!isValid) {
+                // get user input
+                int[] coords = player.placeShip(ship.shipType);
 
-                        int xCoordStart = coords[0];
-                        int yCoordStart = coords[1];
-                        int xCoordEnd = coords[2];
-                        int yCoordEnd = coords[3];
+                int xCoordStart = coords[0];
+                int yCoordStart = coords[1];
+                int xCoordEnd = coords[2];
+                int yCoordEnd = coords[3];
 
+                //ship is on the same column (vertical placement)
+                if (xCoordStart == xCoordEnd && (yCoordEnd == yCoordStart + ship.shipType.getLength() - 1
+                        || yCoordEnd == yCoordStart - ship.shipType.getLength() + 1)) {
 
-                        //ship is on the same column (vertical placement)
-                        if (xCoordStart == xCoordEnd && (yCoordEnd == yCoordStart + shiptype.getLength() - 1
-                                || yCoordEnd == yCoordStart - shiptype.getLength() + 1)) {
+                    //check first if all relevant Fields are free before starting placing ships
+                    int start = Math.min(yCoordStart, yCoordEnd);
+                    int end = Math.max(yCoordStart, yCoordEnd);
 
-                            //check first if all relevant Fields are free before starting placing ships
-                            int start = Math.min(yCoordStart, yCoordEnd);
-                            int end = Math.max(yCoordStart, yCoordEnd);
-
-                            if (columnIsEmpty(xCoordStart, start, end)) {
-                                //place ship on the grid
-                                Ship ship = new Ship(shiptype); //new ship with current ship type
-                                for (int i = start; i <= end; i++) {
-                                    placeShipOnGrid(ship, xCoordStart, i);
-                                }
-                                isValid = true;
-                            } else {
-                                player.printErrorMessage("There is already a ship.");
-                            }
-                            //ship is on the same row (horizontal placement)
-                        } else if (yCoordStart == yCoordEnd && (xCoordEnd == xCoordStart + shiptype.getLength() - 1
-                                || xCoordEnd == xCoordStart - shiptype.getLength() + 1)) {
-
-                            //check first if all relevant Fields are free before starting placing ships
-                            int start = Math.min(xCoordStart, xCoordEnd);
-                            int end = Math.max(xCoordStart, xCoordEnd);
-
-                            if (rowIsEmpty(yCoordStart, start, end)) {
-                                //place ship on the grid
-                                Ship ship = new Ship(shiptype); //new ship with current ship type
-                                for (int i = start; i <= end; i++) {
-                                    placeShipOnGrid(ship, i, yCoordStart);
-                                }
-                                isValid = true;
-                            } else {
-                                player.printErrorMessage("There is already a ship.");
-                            }
-                        } else {
-                            player.printErrorMessage("Sorry, your ship cannot be placed.");
+                    if (columnIsEmpty(xCoordStart, start, end)) {
+                        //place ship on the grid
+                        for (int i = start; i <= end; i++) {
+                            placeShipOnGrid(ship, xCoordStart, i);
                         }
+                        isValid = true;
+                    } else {
+                        player.printErrorMessage("There is already a ship.");
                     }
-                    counter++;
-                    //TODO temporarily display
-                    Display d = new Display();
-                    d.displayOceanGrid(this);
+                    //ship is on the same row (horizontal placement)
+                } else if (yCoordStart == yCoordEnd && (xCoordEnd == xCoordStart + ship.shipType.getLength() - 1
+                        || xCoordEnd == xCoordStart - ship.shipType.getLength() + 1)) {
+
+                    //check first if all relevant Fields are free before starting placing ships
+                    int start = Math.min(xCoordStart, xCoordEnd);
+                    int end = Math.max(xCoordStart, xCoordEnd);
+
+                    if (rowIsEmpty(yCoordStart, start, end)) {
+                        //place ship on the grid
+                        for (int i = start; i <= end; i++) {
+                            placeShipOnGrid(ship, i, yCoordStart);
+                        }
+                        isValid = true;
+                    } else {
+                        player.printErrorMessage("There is already a ship.");
+                    }
+                } else {
+                    player.printErrorMessage("Sorry, your ship cannot be placed.");
                 }
             }
+            //TODO temporarily display
+            Display d = new Display();
+            d.displayOceanGrid(this);
         }
     }
 

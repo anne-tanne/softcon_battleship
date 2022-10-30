@@ -1,7 +1,7 @@
 public class Game {
 
-    private Grid gridPlayerOne;
-    private Grid gridPlayerTwo;
+    private Grid gridPlayer1;
+    private Grid gridPlayer2;
     private Player player1;
     private Player player2;
     private Fleet fleetPlayer1;
@@ -19,15 +19,15 @@ public class Game {
     public void initGame() {
         display = new Display();
 
-        gridPlayerOne = new Grid(player1, player2);
-        gridPlayerTwo = new Grid(player2, player1);
+        gridPlayer1 = new Grid(player1, player2, fleetPlayer1);
+        gridPlayer2 = new Grid(player2, player1, fleetPlayer2);
 
-        display.displayTargetGrid(gridPlayerOne);
-        display.displayOceanGrid(gridPlayerOne);
+        display.displayTargetGrid(gridPlayer1);
+        display.displayOceanGrid(gridPlayer1);
 
         //TEMPORARILY COMMENTED OUT
-        gridPlayerTwo.setInitialShips();
-        gridPlayerOne.setInitialShips();
+        gridPlayer2.setInitialShips();
+        gridPlayer1.setInitialShips();
 
 
         //------STUFF FOR TESTING-----//
@@ -43,30 +43,30 @@ public class Game {
         //ShipType testtype = ShipType.CARRIER;
         //int testlength = testtype.getLength();
 
-        display.displayTargetGrid(gridPlayerOne);
-        display.displayOceanGrid(gridPlayerOne);
+        display.displayTargetGrid(gridPlayer1);
+        display.displayOceanGrid(gridPlayer1);
 
         //Start the game loop
         gameLoop();
     }
 
-    public void gameLoop(){
-        while (!hasWinner()){
-            gridPlayerTwo.updateFieldState(player1.shoot());
-            gridPlayerOne.updateFieldState(player2.shoot());
+    public void gameLoop() {
+        while (!hasWinner()) {
+            gridPlayer2.updateFieldState(player1.shoot());
+            gridPlayer1.updateFieldState(player2.shoot());
 
-            display.displayTargetGrid(gridPlayerTwo);
-            display.displayOceanGrid(gridPlayerOne);
+            display.displayTargetGrid(gridPlayer2);
+            display.displayOceanGrid(gridPlayer1);
         }
     }
 
-    public Boolean hasWinner(){
+    public Boolean hasWinner() {
         //TODO check on each players Fleet
-        if (fleetPlayer1.isFullySunken() || fleetPlayer2.isFullySunken()){
-            if (fleetPlayer1.isFullySunken()){
+        if (fleetPlayer1.isFullySunken() || fleetPlayer2.isFullySunken()) {
+            if (fleetPlayer1.isFullySunken()) {
                 System.out.println("Computer has won!");
             }
-            if (fleetPlayer2.isFullySunken()){
+            if (fleetPlayer2.isFullySunken()) {
                 System.out.println("Congratulations, you won!");
             }
             return true;

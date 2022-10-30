@@ -1,29 +1,28 @@
+import java.util.ArrayList;
+
 public class Fleet {
 
-    Ship[] ships = new Ship[10];
+    private final Ship[] ships;
 
     public Fleet() {
-        createFleet();
+        ships = createFleet();
     }
 
-    public void createFleet(){
-        for (int nrOfShips = 0; nrOfShips < 10; nrOfShips++){
-            if (nrOfShips == 0){ ships[nrOfShips] = new Ship(ShipType.CARRIER); }
-            else if (nrOfShips > 0 && nrOfShips <= 2){
-                ships[nrOfShips] = new Ship(ShipType.BATTLESHIP);
-                ships[nrOfShips] = new Ship(ShipType.BATTLESHIP);}
-            else if (nrOfShips > 2 && nrOfShips <= 5){
-                ships[nrOfShips] = new Ship(ShipType.SUBMARINE);
-                ships[nrOfShips] = new Ship(ShipType.SUBMARINE);
-                ships[nrOfShips] = new Ship(ShipType.SUBMARINE);
-            }
-            else {
-                ships[nrOfShips] = new Ship(ShipType.PATROL);
-                ships[nrOfShips] = new Ship(ShipType.PATROL);
-                ships[nrOfShips] = new Ship(ShipType.PATROL);
-                ships[nrOfShips] = new Ship(ShipType.PATROL);
+    public Ship[] createFleet() {
+        ArrayList<Ship> shipList = new ArrayList<>();
+        for (ShipType shiptype : ShipType.values()) {
+            if (shiptype != ShipType.NONE) { //ignore ShipType NONE
+                int counter = 0;
+                //iterates as long as the counter value hits the number of appearances of the specific ship
+                while (counter < shiptype.getNumber()) {
+                    Ship ship = new Ship(shiptype); //create ship with actual ShipType
+                    shipList.add(ship);
+                    counter++;
+                }
             }
         }
+        Ship[] ships = new Ship[shipList.size()];
+        return shipList.toArray(ships);
     }
 
     public Ship[] getShips() {
