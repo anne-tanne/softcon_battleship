@@ -19,12 +19,13 @@ public class Game {
     public void initGame() {
         display = new Display();
 
-        gridPlayerOne = new Grid(player1);
-        gridPlayerTwo = new Grid(player2);
+        gridPlayerOne = new Grid(player1, player2);
+        gridPlayerTwo = new Grid(player2, player1);
 
         display.displayTargetGrid(gridPlayerOne);
         display.displayOceanGrid(gridPlayerOne);
 
+        //TEMPORARILY COMMENTED OUT
         gridPlayerTwo.setInitialShips();
         gridPlayerOne.setInitialShips();
 
@@ -51,10 +52,11 @@ public class Game {
 
     public void gameLoop(){
         while (!hasWinner()){
-            gridPlayerOne.updateFieldState();
-            gridPlayerTwo.updateFieldState();
-            display.displayTargetGrid(gridPlayerOne);
+            gridPlayerTwo.updateFieldState(player1.shoot());
+            gridPlayerOne.updateFieldState(player2.shoot());
+
             display.displayTargetGrid(gridPlayerTwo);
+            display.displayOceanGrid(gridPlayerOne);
         }
     }
 

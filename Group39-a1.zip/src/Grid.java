@@ -4,11 +4,13 @@ public class Grid {
 
     private final static int GRID_SIZE = 10;
     private Player player;
+    private Player otherPlayer;
     Field[][] grid;
 
-    public Grid(Player player) {
+    public Grid(Player player, Player otherPlayer) {
         grid = createEmptyGrid();
         this.player = player;
+        this.otherPlayer =otherPlayer;
     }
 
     private Field[][] createEmptyGrid() {
@@ -115,8 +117,9 @@ public class Grid {
         grid[coordY][coordX].setShip(ship);
     }
 
-    public void updateFieldState() {
-        int[] coordsXY = player.shoot();
+    public void updateFieldState(int[] coordsXY) {
+        // maybe i could try otherPlayer.shoot() here.
+        //int[] coordsXY = player.shoot();
         int coordX = (int) Array.get(coordsXY, 0);
         int coordY = (int) Array.get(coordsXY, 1);
 
@@ -142,7 +145,7 @@ public class Grid {
                 System.out.println("You have already shot at this location!");
                 // I tried it with otherPlayer but this seems to work
                 // I leave "otherPlayer" in here we can delete it in the end if it's never used.
-                updateFieldState();
+                updateFieldState(otherPlayer.shoot());
             }
         }
     }
