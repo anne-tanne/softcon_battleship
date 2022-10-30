@@ -39,6 +39,7 @@ public class Grid {
                         int xCoordEnd = coords[2];
                         int yCoordEnd = coords[3];
 
+
                         //ship is on the same column (vertical placement)
                         if (xCoordStart == xCoordEnd && (yCoordEnd == yCoordStart + shiptype.getLength() - 1
                                 || yCoordEnd == yCoordStart - shiptype.getLength() + 1)) {
@@ -114,7 +115,8 @@ public class Grid {
         grid[coordY][coordX].setShip(ship);
     }
 
-    public void updateFieldState(int[] coordsXY) {
+    public void updateFieldState() {
+        int[] coordsXY = player.shoot();
         int coordX = (int) Array.get(coordsXY, 0);
         int coordY = (int) Array.get(coordsXY, 1);
 
@@ -140,7 +142,7 @@ public class Grid {
                 System.out.println("You have already shot at this location!");
                 // I tried it with otherPlayer but this seems to work
                 // I leave "otherPlayer" in here we can delete it in the end if it's never used.
-                player.shoot();
+                updateFieldState();
             }
         }
     }
