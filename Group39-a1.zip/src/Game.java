@@ -1,56 +1,44 @@
 public class Game {
 
-    private Grid gridPlayer1;
-    private Grid gridPlayer2;
+    private final Display display;
     private final Player player1;
     private final Player player2;
     private final Fleet fleetPlayer1;
     private final Fleet fleetPlayer2;
-    private Display display;
+    private final Grid gridPlayer1;
+    private final Grid gridPlayer2;
 
     public Game() {
+        display = new Display();
+
         player1 = new HumanPlayer();
         player2 = new ComputerPlayer();
 
         fleetPlayer1 = new Fleet();
         fleetPlayer2 = new Fleet();
-    }
-
-    public void initGame() {
-        display = new Display();
 
         gridPlayer1 = new Grid(player1, player2, fleetPlayer1);
         gridPlayer2 = new Grid(player2, player1, fleetPlayer2);
-
-        display.displayTargetGrid(gridPlayer1);
-        display.displayOceanGrid(gridPlayer1);
-
-        //TEMPORARILY COMMENTED OUT
-        gridPlayer2.setInitialShips();
-        gridPlayer1.setInitialShips();
-
-
-        //------STUFF FOR TESTING-----//
-        //TODO needs x and y coordinates as input
-        //gridPlayerOne.updateFieldState();
-
-        //display.displayTargetGrid(gridPlayerOne);
-        //display.displayOceanGrid(gridPlayerOne);
-
-        //display.displayTargetGrid(gridPlayerOne);
-        //display.displayOceanGrid(gridPlayerOne);
-
-        //ShipType testtype = ShipType.CARRIER;
-        //int testlength = testtype.getLength();
-
-        display.displayTargetGrid(gridPlayer1);
-        display.displayOceanGrid(gridPlayer1);
-
-        //Start the game loop
-        gameLoop();
     }
 
-    public void gameLoop() {
+    public void initGame() {
+        //display initial empty grids
+        display.displayTargetGrid(gridPlayer1);
+        display.displayOceanGrid(gridPlayer1);
+
+        //player and computer player set their ships
+        gridPlayer1.setInitialShips();
+        gridPlayer2.setInitialShips();
+
+        //display grids of human player
+        display.displayTargetGrid(gridPlayer1);
+        display.displayOceanGrid(gridPlayer1);
+
+        //start the game
+        play();
+    }
+
+    public void play() {
         while (!hasWinner()) {
             gridPlayer2.updateFieldState(player1.shoot());
             gridPlayer1.updateFieldState(player2.shoot());
@@ -61,7 +49,6 @@ public class Game {
     }
 
     public Boolean hasWinner() {
-        //TODO check on each players Fleet
         if (fleetPlayer1.isFullySunken() || fleetPlayer2.isFullySunken()) {
             if (fleetPlayer1.isFullySunken()) {
                 System.out.println("Computer has won!");

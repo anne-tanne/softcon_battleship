@@ -1,5 +1,7 @@
 public class Ship {
 
+    //TODO getter/setter for shipType
+
     private int lifeCounter;
     ShipType shipType;
 

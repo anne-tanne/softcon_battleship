@@ -3,10 +3,7 @@ public class Display {
     private final static int GRID_SIZE = 10;
 
     public Display() {
-
     }
-
-    //TODO constructor
 
     //displays the results of the player's own shots
     public void displayTargetGrid(Grid grid) {

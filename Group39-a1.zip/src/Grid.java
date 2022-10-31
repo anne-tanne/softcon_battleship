@@ -104,7 +104,7 @@ public class Grid {
     }
 
     //needed at the beginning to set the ship-fields on the grid
-    public void placeShipOnGrid(Ship ship, int coordX, int coordY) {
+    private void placeShipOnGrid(Ship ship, int coordX, int coordY) {
         grid[coordY][coordX].setFieldState(FieldState.SHIP);
         grid[coordY][coordX].setShip(ship);
     }
@@ -120,6 +120,7 @@ public class Grid {
         switch (hitField.getFieldState()) {
             case EMPTY -> {
                 hitField.setFieldState(FieldState.MISS);
+                //TODO print this in player (extend interface)
                 System.out.println("Bummer, that was a miss :(");
             }
             case SHIP -> {

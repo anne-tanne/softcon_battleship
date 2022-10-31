@@ -18,6 +18,7 @@ public class Input {
     }
 
     public static void placeShipInput(int length, String simplename) {
+        //TODO add format of Input (e.g. "A0,G0")
         System.out.println("Where do you want to place your ship " + simplename + " with the length " + length);
         String placedShipPosition = scanner.nextLine().toUpperCase();
         if (validateShipPlacementInput(placedShipPosition)) {

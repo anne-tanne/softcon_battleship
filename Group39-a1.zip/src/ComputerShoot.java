@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class ComputerShoot implements ShootBehaviour{
 
     @Override

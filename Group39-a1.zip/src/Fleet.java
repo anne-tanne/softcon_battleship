@@ -25,10 +25,6 @@ public class Fleet {
         return shipList.toArray(ships);
     }
 
-    public Ship[] getShips() {
-        return ships;
-    }
-
     public boolean isFullySunken() {
         for (Ship ship : ships) {
             if (!ship.isSunken()) {
@@ -36,5 +32,9 @@ public class Fleet {
             }
         }
         return true;
+    }
+
+    public Ship[] getShips() {
+        return ships;
     }
 }

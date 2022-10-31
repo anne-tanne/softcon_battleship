@@ -1,8 +1,8 @@
-public class HumanShoot implements ShootBehaviour{
+public class HumanShoot implements ShootBehaviour {
 
     //TODO figure out how to handle null (since shootInput can return null or possibly another "incorrect" value
     @Override
-    public int[] shoot(){
+    public int[] shoot() {
         Input.shootInput();
         String attackedField = Input.validShootInput;
         String attackedXAsString = String.valueOf(attackedField.charAt(0));
@@ -25,8 +25,9 @@ public class HumanShoot implements ShootBehaviour{
         } */
 
     }
-    private int convertXCoordToInt(String attackedXCoord){
-        return switch(attackedXCoord){
+
+    private int convertXCoordToInt(String attackedXCoord) {
+        return switch (attackedXCoord) {
             // needs to be here in case the input is wrong. Code doesn't run without default case.
             default -> throw new IllegalArgumentException("Unexpected Input for X coordinate.");
             case "A" -> 0;
