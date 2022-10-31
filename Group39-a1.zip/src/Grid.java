@@ -32,7 +32,7 @@ public class Grid {
             boolean isValid = false;
             while (!isValid) {
                 // get user input
-                int[] coords = player.placeShip(ship.shipType);
+                int[] coords = player.placeShip(ship.getShipType());
 
                 int xCoordStart = coords[0];
                 int yCoordStart = coords[1];
@@ -40,8 +40,8 @@ public class Grid {
                 int yCoordEnd = coords[3];
 
                 //ship is on the same column (vertical placement)
-                if (xCoordStart == xCoordEnd && (yCoordEnd == yCoordStart + ship.shipType.getLength() - 1
-                        || yCoordEnd == yCoordStart - ship.shipType.getLength() + 1)) {
+                if (xCoordStart == xCoordEnd && (yCoordEnd == yCoordStart + ship.getShipType().getLength() - 1
+                        || yCoordEnd == yCoordStart - ship.getShipType().getLength() + 1)) {
 
                     //check first if all relevant Fields are free before starting placing ships
                     int start = Math.min(yCoordStart, yCoordEnd);
@@ -57,8 +57,8 @@ public class Grid {
                         player.printErrorMessage("There is already a ship.");
                     }
                     //ship is on the same row (horizontal placement)
-                } else if (yCoordStart == yCoordEnd && (xCoordEnd == xCoordStart + ship.shipType.getLength() - 1
-                        || xCoordEnd == xCoordStart - ship.shipType.getLength() + 1)) {
+                } else if (yCoordStart == yCoordEnd && (xCoordEnd == xCoordStart + ship.getShipType().getLength() - 1
+                        || xCoordEnd == xCoordStart - ship.getShipType().getLength() + 1)) {
 
                     //check first if all relevant Fields are free before starting placing ships
                     int start = Math.min(xCoordStart, xCoordEnd);

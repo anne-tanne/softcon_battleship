@@ -17,7 +17,7 @@ public class Display {
                     case EMPTY, SHIP -> System.out.print(" |");
                     case HIT -> System.out.print("X|");
                     case MISS -> System.out.print("o|");
-                    case SUNKEN_SHIP -> System.out.print(evaluatePrintSymbolShip(grid.getGrid()[row][col].getShip().shipType));
+                    case SUNKEN_SHIP -> System.out.print(evaluatePrintSymbolShip(grid.getGrid()[row][col].getShip().getShipType()));
                 }
             }
             System.out.print(row + "\n");
@@ -39,7 +39,7 @@ public class Display {
                     case EMPTY -> System.out.print(" |");
                     case HIT, SUNKEN_SHIP -> System.out.print("X|");
                     case MISS -> System.out.print("o|");
-                    case SHIP -> System.out.print(evaluatePrintSymbolShip(grid.getGrid()[row][col].getShip().shipType));
+                    case SHIP -> System.out.print(evaluatePrintSymbolShip(grid.getGrid()[row][col].getShip().getShipType()));
                 }
             }
             System.out.print(row + "\n");
