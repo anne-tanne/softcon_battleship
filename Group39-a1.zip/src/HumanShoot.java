@@ -26,6 +26,11 @@ public class HumanShoot implements ShootBehaviour {
 
     }
 
+    @Override
+    public void printShootMessage(String message) {
+        System.out.println(message);
+    }
+
     private int convertXCoordToInt(String attackedXCoord) {
         return switch (attackedXCoord) {
             // needs to be here in case the input is wrong. Code doesn't run without default case.

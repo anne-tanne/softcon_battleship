@@ -21,7 +21,7 @@ public class Game {
         gridPlayer2 = new Grid(player2, player1, fleetPlayer2);
     }
 
-    public void initGame() {
+    public void start() {
         //display initial empty grids
         display.displayTargetGrid(gridPlayer1);
         display.displayOceanGrid(gridPlayer1);
@@ -40,8 +40,8 @@ public class Game {
 
     public void play() {
         while (!hasWinner()) {
-            gridPlayer2.updateFieldState(player1.shoot());
-            gridPlayer1.updateFieldState(player2.shoot());
+            gridPlayer2.getOpponentsShot(player1.shoot());
+            gridPlayer1.getOpponentsShot(player2.shoot());
 
             display.displayTargetGrid(gridPlayer2);
             display.displayOceanGrid(gridPlayer1);

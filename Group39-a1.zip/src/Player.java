@@ -13,4 +13,8 @@ public class Player {
     public void printErrorMessage(String errormessage){
         placeBehaviour.printErrorMessage(errormessage);
     }
+
+    public void printShootMessage(String message){
+        shootBehaviour.printShootMessage(message);
+    }
 }

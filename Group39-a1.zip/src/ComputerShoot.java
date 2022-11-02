@@ -9,4 +9,9 @@ public class ComputerShoot implements ShootBehaviour{
 
         return new int[] {randXCoord, randYCoord};
     }
+
+    @Override
+    public void printShootMessage(String message) {
+        //do nothing, computer doesn't have feelings
+    }
 }

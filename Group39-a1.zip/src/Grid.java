@@ -109,7 +109,7 @@ public class Grid {
         grid[coordY][coordX].setShip(ship);
     }
 
-    public void updateFieldState(int[] coordsXY) {
+    public void getOpponentsShot(int[] coordsXY) {
         int coordX = (int) Array.get(coordsXY, 0);
         int coordY = (int) Array.get(coordsXY, 1);
 
@@ -120,22 +120,21 @@ public class Grid {
         switch (hitField.getFieldState()) {
             case EMPTY -> {
                 hitField.setFieldState(FieldState.MISS);
-                //TODO print this in player (extend interface)
-                System.out.println("Bummer, that was a miss :(");
+                otherPlayer.printShootMessage("Bummer, that was a miss :(");
             }
             case SHIP -> {
                 hitField.getShip().gotHit();
                 if (hitField.getShip().isSunken()) {
                     destroyShip(hitField.getShip());
-                    System.out.println("That was a hit, the ship is destroyed !!!");
+                    otherPlayer.printShootMessage("That was a hit, the ship is destroyed !!!");
                 } else {
                     hitField.setFieldState(FieldState.HIT);
-                    System.out.println("That was a hit, Nice !!!");
+                    otherPlayer.printShootMessage("That was a hit, Nice !!!");
                 }
             }
             case HIT, MISS, SUNKEN_SHIP -> {
-                System.out.println("You have already shot at this location!");
-                updateFieldState(otherPlayer.shoot());
+                otherPlayer.printShootMessage("You have already shot at this location!");
+                getOpponentsShot(otherPlayer.shoot());
             }
         }
     }
