@@ -77,9 +77,10 @@ public class Grid {
                     player.printErrorMessage("Sorry, your ship cannot be placed.");
                 }
             }
-            //TODO temporarily display
-            Display d = new Display();
-            d.displayOceanGrid(this);
+            //if this grid belongs to a human, print the ocean grid after each ship placement
+            if (this.player instanceof HumanPlayer){
+                Display.displayOceanGrid(this);
+            }
         }
     }
 

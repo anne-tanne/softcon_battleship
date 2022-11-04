@@ -1,6 +1,6 @@
 public class Game {
 
-    private final Display display;
+    //private final Display display;
     private final Player player1;
     private final Player player2;
     private final Fleet fleetPlayer1;
@@ -9,7 +9,7 @@ public class Game {
     private final Grid gridPlayer2;
 
     public Game() {
-        display = new Display();
+        //display = new Display();
 
         player1 = new HumanPlayer();
         player2 = new ComputerPlayer();
@@ -23,16 +23,16 @@ public class Game {
 
     public void start() {
         //display initial empty grids
-        display.displayTargetGrid(gridPlayer1);
-        display.displayOceanGrid(gridPlayer1);
+        Display.displayTargetGrid(gridPlayer1);
+        Display.displayOceanGrid(gridPlayer1);
 
         //player and computer player set their ships
         gridPlayer1.setInitialShips();
         gridPlayer2.setInitialShips();
 
         //display grids of human player
-        display.displayTargetGrid(gridPlayer1);
-        display.displayOceanGrid(gridPlayer1);
+        Display.displayTargetGrid(gridPlayer1);
+        Display.displayOceanGrid(gridPlayer1);
 
         //start the game
         play();
@@ -41,10 +41,12 @@ public class Game {
     public void play() {
         while (!hasWinner()) {
             gridPlayer2.getOpponentsShot(player1.shoot());
+            //ends the game if there is a winner
+            if (hasWinner()){break;}
             gridPlayer1.getOpponentsShot(player2.shoot());
 
-            display.displayTargetGrid(gridPlayer2);
-            display.displayOceanGrid(gridPlayer1);
+            Display.displayTargetGrid(gridPlayer2);
+            Display.displayOceanGrid(gridPlayer1);
         }
     }
 
@@ -52,6 +54,8 @@ public class Game {
         if (fleetPlayer1.isFullySunken() || fleetPlayer2.isFullySunken()) {
             if (fleetPlayer1.isFullySunken()) {
                 System.out.println("Computer has won!");
+                System.out.println("Remaining ships that haven't been destroyed:");
+                Display.displayEnemyOceanGrid(gridPlayer2);
             }
             if (fleetPlayer2.isFullySunken()) {
                 System.out.println("Congratulations, you won!");

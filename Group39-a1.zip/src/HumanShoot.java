@@ -3,6 +3,7 @@ public class HumanShoot implements ShootBehaviour {
     //TODO figure out how to handle null (since shootInput can return null or possibly another "incorrect" value
     @Override
     public int[] shoot() {
+        System.out.println("Where do you want to attack? (i.e. A2): ");
         Input.shootInput();
         String attackedField = Input.validShootInput;
         String attackedXAsString = String.valueOf(attackedField.charAt(0));
@@ -11,19 +12,6 @@ public class HumanShoot implements ShootBehaviour {
         int attackedYCoord = Integer.parseInt(String.valueOf(attackedField.charAt(1)));
 
         return new int[]{attackedXCoord, attackedYCoord};
-
-        /*if (validInputList.contains(attackedField.toUpperCase())){
-            System.out.println("You attacked " + attackedField.toUpperCase() + "!");
-            alreadyShotAtList.add(attackedField.toUpperCase());
-            validInputList.remove(attackedField.toUpperCase());
-        } else if (alreadyShotAtList.contains(attackedField.toUpperCase())){
-            System.out.println("You already attacked " + attackedField.toUpperCase() + ". Attack a new field.");
-            shoot();
-        } else {
-            System.out.println("Please enter a valid Input");
-            shoot();
-        } */
-
     }
 
     @Override
