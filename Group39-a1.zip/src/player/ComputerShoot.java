@@ -12,6 +12,6 @@ public class ComputerShoot implements ShootBehaviour {
 
     @Override
     public void printShootMessage(String message) {
-        //do nothing, computer doesn't have feelings
+        //do nothing
     }
 }

@@ -7,9 +7,10 @@ import player.Player;
 import ship.Fleet;
 import ship.Ship;
 import ship.ShipType;
-import utils.Display;
 
 import java.lang.reflect.Array;
+
+import static utils.DisplayUtils.displayOceanGrid;
 
 public class Grid {
 
@@ -90,7 +91,7 @@ public class Grid {
             }
             //if this grid belongs to a human, print the ocean grid after each ship placement
             if (this.player instanceof HumanPlayer){
-                Display.displayOceanGrid(this);
+                displayOceanGrid(this);
             }
         }
     }

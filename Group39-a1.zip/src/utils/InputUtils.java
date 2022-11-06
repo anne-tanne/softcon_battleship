@@ -2,10 +2,15 @@ package utils;
 
 import java.util.Scanner;
 
-public class Input {
+public final class InputUtils {
+
     private static final Scanner scanner = new Scanner(System.in);
     public static String validShootInput;
     public static String validShipPlacementInput;
+
+    // private constructor to prevent instantiation
+    private InputUtils() {
+    }
 
     public static void shootInput() {
         String attackedField = scanner.nextLine().toUpperCase();
@@ -84,6 +89,23 @@ public class Input {
             }
             return valid;
         }
+    }
+
+    public static int convertXCoordToInt(String attackedXCoord) {
+        return switch (attackedXCoord) {
+            // needs to be here in case the input is wrong. Code doesn't run without default case.
+            default -> throw new IllegalArgumentException("Unexpected Input for X coordinate.");
+            case "A" -> 0;
+            case "B" -> 1;
+            case "C" -> 2;
+            case "D" -> 3;
+            case "E" -> 4;
+            case "F" -> 5;
+            case "G" -> 6;
+            case "H" -> 7;
+            case "I" -> 8;
+            case "J" -> 9;
+        };
     }
 
     private static boolean letterIsInvalid(char pos) {

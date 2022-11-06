@@ -3,11 +3,12 @@ package utils;
 import game.Grid;
 import ship.ShipType;
 
-public class Display {
+public final class DisplayUtils {
 
     private final static int GRID_SIZE = 10;
 
-    public Display() {
+    // private constructor to prevent instantiation
+    private DisplayUtils() {
     }
 
     //displays the results of the player's own shots

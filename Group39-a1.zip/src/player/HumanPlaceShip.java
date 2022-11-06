@@ -1,14 +1,15 @@
 package player;
 
 import ship.ShipType;
-import utils.Input;
+
+import static utils.InputUtils.*;
 
 public class HumanPlaceShip implements PlaceBehaviour {
 
     @Override
     public int[] placeShip(ShipType shiptype) {
-        Input.placeShipInput(shiptype.getLength(), shiptype.getSimplename());
-        String placementCoords = Input.validShipPlacementInput;
+        placeShipInput(shiptype.getLength(), shiptype.getSimplename());
+        String placementCoords = validShipPlacementInput;
         String startcoordXString = String.valueOf(placementCoords.charAt(0));
         String endcoordXString = String.valueOf(placementCoords.charAt(3));
 
@@ -23,22 +24,5 @@ public class HumanPlaceShip implements PlaceBehaviour {
     @Override
     public void printErrorMessage(String errormessage) {
         System.out.println(errormessage);
-    }
-
-    private int convertXCoordToInt(String attackedXCoord) {
-        return switch (attackedXCoord) {
-            // needs to be here in case the input is wrong. Code doesn't run without default case.
-            default -> throw new IllegalArgumentException("Unexpected Input for X coordinate.");
-            case "A" -> 0;
-            case "B" -> 1;
-            case "C" -> 2;
-            case "D" -> 3;
-            case "E" -> 4;
-            case "F" -> 5;
-            case "G" -> 6;
-            case "H" -> 7;
-            case "I" -> 8;
-            case "J" -> 9;
-        };
     }
 }

@@ -4,7 +4,8 @@ import player.ComputerPlayer;
 import player.HumanPlayer;
 import player.Player;
 import ship.Fleet;
-import utils.Display;
+
+import static utils.DisplayUtils.*;
 
 public class Game {
     private final Player player1;
@@ -27,16 +28,16 @@ public class Game {
 
     public void start() {
         //display initial empty grids
-        Display.displayTargetGrid(gridPlayer1);
-        Display.displayOceanGrid(gridPlayer1);
+        displayTargetGrid(gridPlayer1);
+        displayOceanGrid(gridPlayer1);
 
         //player and computer player set their ships
         gridPlayer1.setInitialShips();
         gridPlayer2.setInitialShips();
 
         //display grids of human player
-        Display.displayTargetGrid(gridPlayer1);
-        Display.displayOceanGrid(gridPlayer1);
+        displayTargetGrid(gridPlayer1);
+        displayOceanGrid(gridPlayer1);
 
         //start the game
         play();
@@ -49,8 +50,8 @@ public class Game {
             if (hasWinner()){break;}
             gridPlayer1.getOpponentsShot(player2.shoot());
 
-            Display.displayTargetGrid(gridPlayer2);
-            Display.displayOceanGrid(gridPlayer1);
+            displayTargetGrid(gridPlayer2);
+            displayOceanGrid(gridPlayer1);
         }
     }
 
@@ -59,7 +60,7 @@ public class Game {
             if (fleetPlayer1.isFullySunken()) {
                 System.out.println("Computer has won!");
                 System.out.println("Remaining ships that haven't been destroyed:");
-                Display.displayEnemyOceanGrid(gridPlayer2);
+                displayEnemyOceanGrid(gridPlayer2);
             }
             if (fleetPlayer2.isFullySunken()) {
                 System.out.println("Congratulations, you won!");
