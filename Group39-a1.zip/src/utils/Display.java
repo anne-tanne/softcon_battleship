@@ -1,3 +1,8 @@
+package utils;
+
+import game.Grid;
+import ship.ShipType;
+
 public class Display {
 
     private final static int GRID_SIZE = 10;

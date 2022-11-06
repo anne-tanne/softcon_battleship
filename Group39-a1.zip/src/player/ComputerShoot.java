@@ -1,4 +1,6 @@
-public class ComputerShoot implements ShootBehaviour{
+package player;
+
+public class ComputerShoot implements ShootBehaviour {
 
     @Override
     public int[] shoot() {

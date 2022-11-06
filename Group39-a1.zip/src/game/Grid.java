@@ -1,3 +1,14 @@
+package game;
+
+import field.Field;
+import field.FieldState;
+import player.HumanPlayer;
+import player.Player;
+import ship.Fleet;
+import ship.Ship;
+import ship.ShipType;
+import utils.Display;
+
 import java.lang.reflect.Array;
 
 public class Grid {

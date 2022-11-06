@@ -1,3 +1,5 @@
+package field;
+
 public enum FieldState {
     EMPTY,
     HIT,

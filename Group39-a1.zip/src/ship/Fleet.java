@@ -1,3 +1,5 @@
+package ship;
+
 import java.util.ArrayList;
 
 public class Fleet {

@@ -1,3 +1,7 @@
+package player;
+
+import utils.Input;
+
 public class HumanShoot implements ShootBehaviour {
 
     @Override

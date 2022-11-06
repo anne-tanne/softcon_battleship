@@ -1,3 +1,5 @@
+package ship;
+
 public enum ShipType {
     CARRIER(1, 6, "Carrier"),
     BATTLESHIP(2, 4, "Battleship"),

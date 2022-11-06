@@ -1,3 +1,7 @@
+package player;
+
+import ship.ShipType;
+
 public class Player {
 
     public ShootBehaviour shootBehaviour;

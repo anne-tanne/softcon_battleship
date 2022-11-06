@@ -1,3 +1,5 @@
+package ship;
+
 public class Ship {
 
     private final ShipType shipType;

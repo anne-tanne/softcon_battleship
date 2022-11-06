@@ -1,3 +1,5 @@
+package player;
+
 public interface ShootBehaviour {
     int[] shoot();
 

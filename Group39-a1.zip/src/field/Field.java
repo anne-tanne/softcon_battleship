@@ -1,3 +1,7 @@
+package field;
+
+import ship.Ship;
+
 public class Field {
 
     private FieldState fieldState;

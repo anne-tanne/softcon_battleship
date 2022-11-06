@@ -1,3 +1,7 @@
+package player;
+
+import ship.ShipType;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ComputerPlaceShip implements PlaceBehaviour {

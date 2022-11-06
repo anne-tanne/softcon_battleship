@@ -1,3 +1,8 @@
+package player;
+
+import ship.ShipType;
+import utils.Input;
+
 public class HumanPlaceShip implements PlaceBehaviour {
 
     @Override

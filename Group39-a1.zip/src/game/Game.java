@@ -1,3 +1,11 @@
+package game;
+
+import player.ComputerPlayer;
+import player.HumanPlayer;
+import player.Player;
+import ship.Fleet;
+import utils.Display;
+
 public class Game {
     private final Player player1;
     private final Player player2;

@@ -1,9 +1,11 @@
+package utils;
+
 import java.util.Scanner;
 
 public class Input {
     private static final Scanner scanner = new Scanner(System.in);
-    static String validShootInput;
-    static String validShipPlacementInput;
+    public static String validShootInput;
+    public static String validShipPlacementInput;
 
     public static void shootInput() {
         String attackedField = scanner.nextLine().toUpperCase();
