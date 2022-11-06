@@ -14,6 +14,9 @@ public class Input {
         }
     }
 
+    /**
+     * @pre length != null && simplename != null
+     */
     public static void placeShipInput(int length, String simplename) {
         System.out.println("Where do you want to place your ship " + simplename + " with the length " + length + "? (i.e. A0,A2)");
         String placedShipPosition = scanner.nextLine().toUpperCase();
@@ -24,6 +27,9 @@ public class Input {
         }
     }
 
+    /**
+     * @pre shootInput != null
+     */
     private static boolean validateShootInput(String shootInput) {
         assert shootInput != null;
         if (shootInput.length() != 2) {
@@ -43,7 +49,9 @@ public class Input {
         }
     }
 
-    // todo design by contract
+    /**
+     * @pre placedShipPosition != null
+     */
     private static boolean validateShipPlacementInput(String placedShipPosition) {
         if (placedShipPosition.length() != 5) {
             System.out.println("Input must be exactly 5 characters long.");

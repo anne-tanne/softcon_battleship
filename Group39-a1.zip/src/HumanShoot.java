@@ -1,6 +1,5 @@
 public class HumanShoot implements ShootBehaviour {
 
-    //TODO figure out how to handle null (since shootInput can return null or possibly another "incorrect" value
     @Override
     public int[] shoot() {
         System.out.println("Where do you want to attack? (i.e. A2): ");

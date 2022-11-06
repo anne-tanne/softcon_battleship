@@ -1,6 +1,4 @@
 public class Game {
-
-    //private final Display display;
     private final Player player1;
     private final Player player2;
     private final Fleet fleetPlayer1;
@@ -9,8 +7,6 @@ public class Game {
     private final Grid gridPlayer2;
 
     public Game() {
-        //display = new Display();
-
         player1 = new HumanPlayer();
         player2 = new ComputerPlayer();
 
